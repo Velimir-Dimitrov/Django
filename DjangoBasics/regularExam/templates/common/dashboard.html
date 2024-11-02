@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load get_author %}
+
+{% block content %}
+
+        {% get_author as author %}
+        {% if author.posts.all %}
+            <h2>Published Posts</h2>
+        {% else %}
+            <h2>No published posts yet.</h2>
+        {% endif %}
+
+        <section id="dashboard">
+            {% for post in author.posts.all %}
+          <div class="post">
+            <img
+              src="{{ post.image_url }}"
+              alt="My cool fluffy rabbits img"
+            />
+            <!-- post title -->
+            <h3 class="title">{{ post.title }}</h3>
+            <!-- post content -->
+            <p class="description">{{ post.content|truncatewords:3 }}</p>
+            <!-- post details button -->
+            <a class="details-btn" href="{% url 'post-details' post.id %}">See More</a>
+          </div>
+        {% endfor %}
+        </section>
+
+{% endblock %}

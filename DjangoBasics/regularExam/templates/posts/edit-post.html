@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+        <!-- Edit Post Form -->
+        <section id="edit">
+          <div class="form">
+            <h2>Edit Post</h2>
+
+            <form class="edit-form" method="POST" action="">
+                {% csrf_token %}
+                {{ form }}
+              <button type="submit">Edit</button>
+            </form>
+          </div>
+        </section>
+
+
+{% endblock %}

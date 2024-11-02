@@ -1,0 +1,37 @@
+{% extends 'common/base.html' %}
+{% load uppercase %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% uppercase %}
+        <h1>Hello!</h1>
+{#        <h2>{{ static_time|time:"s"  }}</h2>#}
+{#        <h4>{{ dynamic_time|time:"s"  }}</h4>#}
+    {% enduppercase %}
+    
+    {{ dynamic_time }}
+    
+    <form>
+        {% crispy test_form_factory %}
+    </form>
+    
+{# modelform_factory and simple form styling #}
+{% comment %}    
+
+    {{ test_form_factory.as_ul }}
+    {{ test_form_factory.as_p }} 
+    {{ test_form_factory.as_div }}
+    
+    <form>
+    {% for field in test_form_factory %}
+        <input
+            type="{{ field.widget_type }}"
+            id="{{ field.id_for_label }}"
+            name="{{ field.html_name }}"
+        />
+    {% endfor %}
+    </form>
+    
+{% endcomment %} 
+    
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "common/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="col-9">
+        
+        {% include "common/pet-posts.html" with photo_details=True %}
+        
+    </div>
+</div>
+
+{% endblock %}
