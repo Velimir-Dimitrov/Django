@@ -21,6 +21,10 @@ class Post(models.Model):
         auto_now_add=True
     )
 
+    approved = models.BooleanField(
+        default=False,
+    )
+
     languages = models.CharField(
         choices=LanguageChoice.choices,
         default=LanguageChoice.OTHER
@@ -31,6 +35,11 @@ class Post(models.Model):
         blank=True,
         null=True,
     )
+
+    class Meta:
+        permissions = [
+            ('can_approve_posts', 'Can approve posts')
+        ]
 
 class Comment(models.Model):
     post = models.ForeignKey(

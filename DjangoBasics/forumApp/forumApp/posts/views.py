@@ -1,4 +1,6 @@
 import datetime
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -114,9 +116,13 @@ class DashboardView(ListView, FormView):
     def get_queryset(self):
         queryset = self.model.objects.all()
 
+        if not self.request.user.has_perm('posts.can_approve_posts'):
+            queryset = queryset.filter(approved=True)
+
         if 'query' in self.request.GET:
             query = self.request.GET['query']
             queryset = queryset.filter(title__icontains=query)
+
         return queryset
 
 
@@ -138,7 +144,15 @@ class DashboardView(ListView, FormView):
 #     return render(request, 'posts/dashboard.html', context)
 
 
-class AddPostView(CreateView):
+def approve_post(request, pk):
+    post = Post.objects.get(pk=pk)
+    post.approved = True
+    post.save()
+
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+class AddPostView(LoginRequiredMixin, CreateView):
     form_class = PostCreateForm
     model = Post
     template_name = "posts/add-post.html"

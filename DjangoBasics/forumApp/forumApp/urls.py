@@ -21,7 +21,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('forumApp.posts.urls'))
+    path('', include('forumApp.posts.urls')),
+    path('accounts/', include('forumApp.accounts.urls')),
 ]
 
 if settings.DEBUG:

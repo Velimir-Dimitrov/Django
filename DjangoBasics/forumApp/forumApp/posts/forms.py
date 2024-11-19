@@ -9,7 +9,7 @@ from forumApp.posts.mixins import DisableFieldsMixin
 class PostBaseForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = '__all__'
+        exclude = ['approved',]
         error_messages = {
             "title": {
                 "required": "Testing missing title and required turned off from html"
