@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, resolve_url
 from django.views.generic import ListView
 
@@ -20,6 +21,11 @@ class HomePage(ListView):
 
         context['comment_form'] = CommentForm()
         context['search_form'] = SearchForm(self.request.GET)
+
+        user = self.request.user
+
+        for photo in context['all_photos']:
+            photo.has_liked = photo.like_set.filter(user=user).exists() if user.is_authenticated else False
 
         return context
 
@@ -53,9 +59,13 @@ class HomePage(ListView):
 #
 #     return render(request, 'common/home-page.html', context)
 
+@login_required
 def like_functionality(request, photo_id):
 
-    liked_object = Like.objects.filter(to_photo_id=photo_id).first()
+    liked_object = Like.objects.filter(
+        to_photo_id=photo_id,
+        user=request.user
+    ).first()
 
     if liked_object:
         liked_object.delete()
@@ -70,6 +80,7 @@ def copy_link_to_clipboard(request, photo_id):
 
     return redirect(request.META['HTTP_REFERER'] + f'#{photo_id}')
 
+@login_required
 def add_comment(request, photo_id):
     if request.method == "POST":
         photo = Photo.objects.get(id=photo_id)

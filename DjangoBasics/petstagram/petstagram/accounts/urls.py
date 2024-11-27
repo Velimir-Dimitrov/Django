@@ -2,7 +2,8 @@ from django.contrib.auth.views import LogoutView
 from django.urls import path, include
 
 from petstagram.accounts import views
-from petstagram.accounts.views import AppUserRegisterView, AppUserLoginView, ProfileEditView, ProfileDetailsView
+from petstagram.accounts.views import AppUserRegisterView, AppUserLoginView, ProfileEditView, ProfileDetailsView, \
+    ProfileDeleteView
 
 urlpatterns = [
     path('register/', AppUserRegisterView.as_view(), name='register'),
@@ -11,6 +12,6 @@ urlpatterns = [
     path('profile/<int:pk>/', include([
         path('', ProfileDetailsView.as_view(), name='profile-details'),
         path('edit/', ProfileEditView.as_view(), name='profile-edit'),
-        path('delete/', views.delete_profile, name='profile-delete'),
+        path('delete/', ProfileDeleteView.as_view(), name='profile-delete'),
     ]))
 ]
