@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'FiTrack.accounts.apps.AccountsConfig',
+    'FiTrack.workout.apps.WorkoutConfig',
+    'FiTrack.goal.apps.GoalConfig',
+    'FiTrack.progress.apps.ProgressConfig',
+    'FiTrack.category.apps.CategoryConfig'
 ]
 
 MIDDLEWARE = [
