@@ -38,8 +38,25 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_rest.books_api.apps.BooksApiConfig',
-    'rest_framework',
+
+    'rest_framework', #pip install djangorestframework
+    'drf_spectacular',  #pip install drf-spectacular for swagger
 ]
+
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    # Optional: removes the rest_framework visualization tool
+    'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',),
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Library',
+    'DESCRIPTION': 'My REST API project',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
