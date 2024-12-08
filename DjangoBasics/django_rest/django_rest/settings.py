@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+import corsheaders
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,8 +27,14 @@ SECRET_KEY = 'django-insecure-fabs0a5ipi)sz)+r2f6r(sd8#-3n$v8ghf-k8s%ys&siwin8oa
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
 
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5500",  # Allow requests from this origin
+    "http://localhost:5500",  # Also include localhost if needed
+]
 
 # Application definition
 
@@ -41,6 +49,7 @@ INSTALLED_APPS = [
 
     'rest_framework', #pip install djangorestframework
     'drf_spectacular',  #pip install drf-spectacular for swagger
+    'corsheaders', #pip install django-cors-headers
 ]
 
 REST_FRAMEWORK = {
@@ -59,6 +68,7 @@ SPECTACULAR_SETTINGS = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
