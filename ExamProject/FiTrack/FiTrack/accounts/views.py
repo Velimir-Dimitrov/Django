@@ -41,5 +41,6 @@ class ProfileEditView(UpdateView):
     model = Profile
     form_class = ProfileEditForm
     template_name = 'accounts/edit.html'
+    success_url = reverse_lazy('profile-details')
 
     # TO DO: Login required and restriction from accessing this webpage via manually entered URL

@@ -5,6 +5,10 @@
     <title>Edit account</title>
 </head>
 <body>
-
+    <form method="post" enctype="multipart/form-data">
+        {{ form }}
+        {% csrf_token %}
+        <button>Submit</button>
+    </form>
 </body>
 </html>
