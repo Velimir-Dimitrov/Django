@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Category List</title>
+</head>
+<body>
+    <h1>Workout Categories</h1>
+        <ul>
+            {% for category in categories %}
+                <li>{{ category.name }} - <a href="{% url 'edit_category' category.pk %}">Edit</a></li>
+            {% endfor %}
+        </ul>
+    <a href="{% url 'add_category' %}">Add new category</a>
+</body>
+</html>
