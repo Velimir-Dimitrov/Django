@@ -2,6 +2,8 @@ from django.views.generic import TemplateView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import requests
+from FiTrack.settings import WEATHER_API_TOKEN
+
 
 # Create your views here.
 
@@ -23,7 +25,7 @@ class WeatherAPIView(APIView):
         lat = request.query_params.get('lat')
         lon = request.query_params.get('lon')
         API_URL = 'https://api.openweathermap.org/data/2.5/weather'
-        API_KEY = '53f7645f3d7b2998a66680c9de6813e7'
+        API_KEY = WEATHER_API_TOKEN
 
         if not lat or not lon:
             return Response({'error': 'Latitude and longitude are required.'}, status=400)
