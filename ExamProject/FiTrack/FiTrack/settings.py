@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'FiTrack.workout.apps.WorkoutConfig',
     'FiTrack.goal.apps.GoalConfig',
     'FiTrack.common.apps.ProgressConfig',
-    'FiTrack.category.apps.CategoryConfig'
+    'FiTrack.category.apps.CategoryConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
