@@ -1,3 +1,24 @@
-from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView
 
-# Create your views here.
+from .forms import CategoryForm
+from .models import Category
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'categories/category_list.html'
+    context_object_name = 'categories'
+
+class CategoryCreateView(CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'categories/add_category.html'
+    success_url = reverse_lazy('category_list')
+
+
+class CategoryUpdateView(UpdateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'categories/edit_category.html'
+    context_object_name = 'category'
+    success_url = reverse_lazy('category_list')

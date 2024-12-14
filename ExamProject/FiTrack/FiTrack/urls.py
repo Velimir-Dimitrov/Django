@@ -22,6 +22,7 @@ from FiTrack import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('FiTrack.accounts.urls')),
+    path('categories/', include('FiTrack.category.urls'))
 ]
 
 if settings.DEBUG:
