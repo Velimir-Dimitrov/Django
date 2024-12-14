@@ -1,0 +1,37 @@
+    <div id="weather">
+        <p>Fetching your weather data...</p>
+    </div>
+
+    <script>
+        // Fetch browser location
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                // Fetch data from Django API
+                fetch(`/api/weather?lat=${latitude}&lon=${longitude}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update the DOM with weather information
+                        if (data.error) {
+                            document.getElementById('weather').innerHTML = `<p>Error: ${data.error}</p>`;
+                        } else {
+                            document.getElementById('weather').innerHTML = `
+                                <p><strong>Location:</strong> ${data.location}</p>
+                                <p><strong>Temperature:</strong> ${data.temperature} °C</p>
+                                <p><strong>Condition:</strong> ${data.description}</p>
+                            `;
+                        }
+                    })
+                    .catch(error => {
+                        document.getElementById('weather').innerHTML = `<p>Error fetching weather data. Try again later.</p>`;
+                        console.error("Error:", error);
+                    });
+            },
+            function(error) {
+                document.getElementById('weather').innerHTML = `<p>Unable to access your location. Please allow location services.</p>`;
+                console.error("Geolocation Error:", error);
+            }
+        );
+    </script>
