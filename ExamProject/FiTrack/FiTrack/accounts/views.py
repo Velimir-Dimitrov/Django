@@ -1,17 +1,16 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, ListView
-from FiTrack.accounts.forms import AppUserCreationForm, ProfileEditForm
+from FiTrack.accounts.forms import AppUserCreationForm, ProfileEditForm, AppUserLoginForm
 from FiTrack.accounts.models import Profile
+from FiTrack.mixins import PlaceholderMixin
 
 UserModel = get_user_model()
 
 class AppUserLoginView(LoginView):
     template_name = 'accounts/login.html'
-
+    form_class = AppUserLoginForm
 
 class AppUserRegisterView(CreateView):
     model = UserModel
