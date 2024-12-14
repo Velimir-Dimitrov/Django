@@ -13,17 +13,50 @@
                 fetch(`/api/weather?lat=${latitude}&lon=${longitude}`)
                     .then(response => response.json())
                     .then(data => {
-                        // Update the DOM with weather information
-                        if (data.error) {
-                            document.getElementById('weather').innerHTML = `<p>Error: ${data.error}</p>`;
-                        } else {
-                            document.getElementById('weather').innerHTML = `
-                                <p><strong>Location:</strong> ${data.location}</p>
-                                <p><strong>Temperature:</strong> ${data.temperature} °C</p>
-                                <p><strong>Condition:</strong> ${data.description}</p>
-                            `;
-                        }
-                    })
+    const weatherElement = document.getElementById('weather');
+
+    // Clear the content initially (in case there was a loading message)
+    weatherElement.innerHTML = '';
+
+    if (data.error) {
+        const errorMessage = document.createElement('p');
+        errorMessage.textContent = `Error: ${data.error}`;
+        weatherElement.appendChild(errorMessage);
+    } else {
+        const temperature = data.temperature;
+        const condition = data.description.toLowerCase();
+
+        // Basic advice on whether to stay inside or outside based on weather
+        let weatherMessage = '';
+        if (condition.includes("rain") || condition.includes("storm") || temperature < 10) {
+            weatherMessage = "It's better to stay inside today.";
+        } else if (condition.includes("snow") || temperature < 0) {
+            weatherMessage = "It's cold and snowy outside, stay warm indoors!";
+        } else if (condition.includes("clear") || condition.includes("sunny")) {
+            weatherMessage = "It looks like a great day to be outside!";
+        } else {
+            weatherMessage = "The weather is fine, but use your best judgment!";
+        }
+
+        // Create and append elements
+        const locationElement = document.createElement('p');
+        locationElement.innerHTML = `<strong>Location:</strong> ${data.location}`;
+        weatherElement.appendChild(locationElement);
+
+        const temperatureElement = document.createElement('p');
+        temperatureElement.innerHTML = `<strong>Temperature:</strong> ${data.temperature} °C`;
+        weatherElement.appendChild(temperatureElement);
+
+        const conditionElement = document.createElement('p');
+        conditionElement.innerHTML = `<strong>Condition:</strong> ${data.description}`;
+        weatherElement.appendChild(conditionElement);
+
+        const recommendationElement = document.createElement('p');
+        recommendationElement.innerHTML = `<strong>Recommendation:</strong> ${weatherMessage}`;
+        weatherElement.appendChild(recommendationElement);
+    }
+})
+
                     .catch(error => {
                         document.getElementById('weather').innerHTML = `<p>Error fetching weather data. Try again later.</p>`;
                         console.error("Error:", error);

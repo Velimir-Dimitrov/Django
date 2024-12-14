@@ -18,8 +18,6 @@ class HomePage(TemplateView):
             return ['common/index_logged_out.html']
 
 
-
-
 class WeatherAPIView(APIView):
     def get(self, request):
         lat = request.query_params.get('lat')
