@@ -9,10 +9,6 @@ from FiTrack.accounts.models import Profile
 
 UserModel = get_user_model()
 
-def just_test(request):
-    return render(request, 'accounts/base.html')
-
-
 class AppUserLoginView(LoginView):
     template_name = 'accounts/login.html'
 

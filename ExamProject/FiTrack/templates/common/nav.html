@@ -1,0 +1,7 @@
+<div class="nav-wrapper">
+    <ul class="nav">
+        <li class="home"><a href="{% url 'home' %}" title="Home" class="selected current">Home</a></li>
+        <li class="statistics"><a href="/" title="Home" class="selected current">Statistics </a></li>
+        <li class="profile"><a href="{% url 'profile-details' request.user.pk %}" title="Home" class="selected current">My Profile </a></li>
+    </ul>
+</div>
