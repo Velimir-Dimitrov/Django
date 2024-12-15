@@ -2,12 +2,15 @@
 
 {% block content %}
 <h1>Your Goals</h1>
+<h1>Your Goals</h1>
 <ul>
     {% for goal in object_list %}
         <li>
-            <a href="{% url 'goal-detail' goal.pk %}">{{ goal.name }}</a> 
-            - {{ goal.is_completed|yesno:"Completed,Not Completed" }}
+            <a href="{% url 'goal-detail' goal.id %}">{{ goal.name }}</a> 
+            - Target: {{ goal.target_date }}
         </li>
+    {% empty %}
+        <p>You have no goals. <a href="{% url 'goal-create' %}">Create a goal</a> to get started.</p>
     {% endfor %}
 </ul>
 
