@@ -1,0 +1,14 @@
+{% extends 'common/index.html' %}
+
+{% block content %}
+
+
+<h1>{% if object %}Edit{% else %}Create{% endif %} Workout</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+    <a href="{% url 'workout-detail' user_id=workout.account.id pk=workout.pk %}">Cancel</a>
+</form>
+
+{% endblock %}

@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('FiTrack.common.urls')),
     path('accounts/', include('FiTrack.accounts.urls')),
-    path('categories/', include('FiTrack.category.urls'))
+    path('categories/', include('FiTrack.category.urls')),
+    path('workouts/', include('FiTrack.workout.urls')),
 ]
 
 if settings.DEBUG:
