@@ -36,8 +36,11 @@ class WeatherAPIView(APIView):
         })
         weather_data = response.json()
 
+        icon_code = weather_data['weather'][0]['icon']
+
         return Response({
             'location': weather_data['name'],
             'temperature': weather_data['main']['temp'],
-            'description': weather_data['weather'][0]['description']
+            'description': weather_data['weather'][0]['description'],
+            'icon': icon_code
         })
