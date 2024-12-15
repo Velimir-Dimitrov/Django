@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Category List</title>
-</head>
-<body>
+{% extends 'common/index.html' %}
+
+{% block content %}
+
     <h1>Workout Categories</h1>
         <ul>
             {% for category in categories %}
@@ -11,5 +9,5 @@
             {% endfor %}
         </ul>
     <a href="{% url 'add_category' %}">Add new category</a>
-</body>
-</html>
+
+{% endblock %}

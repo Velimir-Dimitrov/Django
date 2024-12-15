@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Category</title>
-</head>
-<body>
-    <h1>Add a new workout category</h1>
+{% extends 'common/index.html' %}
+
+{% block content %}
+
+    <h1>{% if object %}Edit{% else %}Add a new {% endif %} workout category</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save Category</button>
     </form>
     <a href="{% url 'category_list' %}">Back to category list</a>
-</body>
-</html>
+
+{% endblock %}

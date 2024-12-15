@@ -12,13 +12,13 @@ class CategoryListView(ListView):
 class CategoryCreateView(CreateView):
     model = Category
     form_class = CategoryForm
-    template_name = 'categories/add_category.html'
+    template_name = 'categories/add-edit-category.html'
     success_url = reverse_lazy('category_list')
 
 
 class CategoryUpdateView(UpdateView):
     model = Category
     form_class = CategoryForm
-    template_name = 'categories/edit_category.html'
+    template_name = 'categories/add-edit-category.html'
     context_object_name = 'category'
     success_url = reverse_lazy('category_list')
