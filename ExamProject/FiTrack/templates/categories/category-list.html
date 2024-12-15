@@ -1,13 +1,13 @@
 {% extends 'common/index.html' %}
 
 {% block content %}
-
-    <h1>Workout Categories</h1>
-        <ul>
-            {% for category in categories %}
-                <li>{{ category.name }} - <a href="{% url 'edit_category' category.pk %}">Edit</a></li>
-            {% endfor %}
-        </ul>
-    <a href="{% url 'add_category' %}">Add new category</a>
-
+    <div class="main-content form-wrapper">
+        <h1>Workout Categories</h1>
+            <ul>
+                {% for category in categories %}
+                    <li>{{ category.name }} - <a href="{% url 'edit_category' category.pk %}">Edit</a></li>
+                {% endfor %}
+            </ul>
+        <a href="{% url 'add_category' %}">Add new category</a>
+    </div>
 {% endblock %}

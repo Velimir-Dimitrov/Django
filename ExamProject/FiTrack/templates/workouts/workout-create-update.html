@@ -1,18 +1,17 @@
 {% extends 'common/index.html' %}
 
 {% block content %}
-
-
-<h1>{% if object %}Edit{% else %}Create{% endif %} Workout</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-    {% if workout %}
-        <a href="{% url 'workout-detail' user_id=workout.account.id pk=workout.pk %}">Cancel</a>
-    {% else %}
-        <a href="{% url 'workout-list' %}">Cancel</a>
-    {% endif %}
-</form>
-
+    <div class="main-content form-wrapper">
+        <h1>{% if object %}Edit{% else %}Create{% endif %} Workout</h1>
+        <form method="post" class="form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn" >Save</button>
+            {% if workout %}
+                <a href="{% url 'workout-detail' user_id=workout.account.id pk=workout.pk %}" class="btn">Cancel</a>
+            {% else %}
+                <a href="{% url 'workout-list' %}" class="btn">Cancel</a>
+            {% endif %}
+        </form>
+    </div>
 {% endblock %}

@@ -1,8 +1,9 @@
 {% extends 'common/index.html' %}
 
-{% block content %}
-    <h1>Hello, {{ request.user.profile }}!</h1>
-    
-    {% include 'common/weather.html' %}
-
+{% block content %}    
+    <div class="main-content">    
+        <h1>Hello, {{ request.user.profile }}!</h1>
+        
+        {% include 'common/weather.html' %}
+    </div>
 {% endblock %}

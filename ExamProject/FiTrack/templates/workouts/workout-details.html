@@ -1,13 +1,13 @@
 {% extends 'common/index.html' %}
 
 {% block content %}
-
-<h1>{{ workout.name }}</h1>
-<p><strong>Category:</strong> {{ workout.category }}</p>
-<p><strong>Duration:</strong> {{ workout.duration_minutes }} minutes</p>
-<p><strong>Calories Burned:</strong> {{ workout.calories_burned }}</p>
-<p><strong>Date:</strong> {{ workout.date }}</p>
-<a href="{% url 'workout-update' user_id=workout.account.id pk=workout.pk %}">Edit</a>
-<a href="{% url 'workout-delete' user_id=workout.account.id pk=workout.pk %}">Delete</a>
-
+    <div class="main-content form-wrapper">
+        <h1>{{ workout.name }}</h1>
+        <p><strong>Category:</strong> {{ workout.category }}</p>
+        <p><strong>Duration:</strong> {{ workout.duration_minutes }} minutes</p>
+        <p><strong>Calories Burned:</strong> {{ workout.calories_burned }}</p>
+        <p><strong>Date:</strong> {{ workout.date }}</p>
+        <a href="{% url 'workout-update' user_id=workout.account.id pk=workout.pk %}" class="btn">Edit</a>
+        <a href="{% url 'workout-delete' user_id=workout.account.id pk=workout.pk %}" class="btn">Delete</a>
+    </div>
 {% endblock %}

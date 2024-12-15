@@ -95,8 +95,8 @@ body {
 .main-content {
     z-index: 10;
     position: relative;
-    max-width: 50%;
-    margin: 50px auto;
+    width: 50%;
+    margin: 50px auto 160px;
     padding: 20px;
     background-color: #00000099;
     font: 25px 'Roboto Condensed';
@@ -106,7 +106,7 @@ body {
     display: inline-block;
 }
 
-.main-content p {
+.home p {
     padding: 10px;
     display: inline-block;
     vertical-align: top;
@@ -119,9 +119,12 @@ body {
 
 .btn {
     display: block;
+    max-width: 200px;
     margin: 20px 0;
     padding: 10px;
     text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
     color: white;
     background: rgba(255, 0, 150, 0.3);
     font: 20px 'Roboto Condensed';
@@ -170,14 +173,84 @@ footer {
   visibility: visible;
 }
 
+.form input {
+    display: block;
+    margin: 10px auto 15px;
+    height: 35px;
+    min-width: 360px;
+}
+
+.form textarea {
+    display: block;
+    margin: 10px auto 15px;
+    min-width: 360px;
+}
+
+.form-login input {
+    min-width: 320px;
+}
+
+.form > div {
+    max-width: 370px;
+    margin: 0 auto;
+}
+
+.form .btn {
+    margin: 0 auto;
+}
+
+.form-login {
+    max-width: 350px;
+}
+
+.form-wrapper,
+.form-details,
+.form-delete {
+    max-width: 550px;
+    font-size: 20px;
+}
+
+.form-wrapper ul {
+    text-align: left;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.form-wrapper .helptext{
+    font-size: 18px;
+}
+
+.update-msg a {
+    display: block;
+    margin: 5px auto;
+    color: #fff;
+    font-style: italic;
+}
+
+.form-details .btn,
+.form-delete .btn,
+.btn-delete,
+.dashboard .btn {
+    display: inline-block;
+    margin: 0 10px 10px 0;
+}
+
+.btn-secondary {
+    background: grey;
+}
+
 @media only screen and (max-width: 992px) {
      .main-content {
-        max-width: 100%;
+        width: 100%;
         text-align: center;
      }
 
     body {
         background: grey;
         text-align: center;
+    }
+
+    .form input {
+        min-width: 300px;
     }
 }
