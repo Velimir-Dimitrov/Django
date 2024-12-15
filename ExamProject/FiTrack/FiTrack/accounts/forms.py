@@ -1,8 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm, AuthenticationForm
-from django.views.generic import FormView
-
 from FiTrack.accounts.models import Profile
 from FiTrack.mixins import PlaceholderMixin
 

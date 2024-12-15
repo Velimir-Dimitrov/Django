@@ -6,19 +6,19 @@ from .models import Category
 
 class CategoryListView(ListView):
     model = Category
-    template_name = 'categories/category_list.html'
+    template_name = 'categories/category-list.html'
     context_object_name = 'categories'
 
 class CategoryCreateView(CreateView):
     model = Category
     form_class = CategoryForm
-    template_name = 'categories/add-edit-category.html'
+    template_name = 'categories/category-add-edit.html'
     success_url = reverse_lazy('category_list')
 
 
 class CategoryUpdateView(UpdateView):
     model = Category
     form_class = CategoryForm
-    template_name = 'categories/add-edit-category.html'
+    template_name = 'categories/category-add-edit.html'
     context_object_name = 'category'
     success_url = reverse_lazy('category_list')
