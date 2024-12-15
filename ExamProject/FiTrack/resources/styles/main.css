@@ -92,13 +92,9 @@ body {
     text-decoration: underline;
 }
 
-main {
+.main-content {
     z-index: 10;
     position: relative;
-    padding: 1.5rem;
-}
-
-.main-content {
     max-width: 50%;
     margin: 50px auto;
     padding: 20px;
@@ -117,8 +113,6 @@ main {
 }
 
 .training {
-    float: right;
-    clear: right;
     display: inline-block;
     margin-left: auto;
 }
@@ -147,4 +141,43 @@ footer {
     padding: 1rem 0;
     bottom: 0;
     width: 100%;
+}
+
+.photocredits {
+    position: relative;
+    display: inline-block;
+}
+
+.photocredits .tooltiptext {
+  visibility: hidden;
+  width: 220px;
+  background-color: grey;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.photocredits .tooltiptext a {
+    color: #fff;
+}
+
+.photocredits:hover .tooltiptext {
+  visibility: visible;
+}
+
+@media only screen and (max-width: 992px) {
+     .main-content {
+        max-width: 100%;
+        text-align: center;
+     }
+
+    body {
+        background: grey;
+        text-align: center;
+    }
 }
