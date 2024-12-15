@@ -26,3 +26,6 @@ class Workout(models.Model):
     description = models.TextField(blank=True, null=True)
 
     date = models.DateField()
+
+    def __str__(self):
+        return self.name

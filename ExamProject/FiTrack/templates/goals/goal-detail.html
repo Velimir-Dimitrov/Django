@@ -1,0 +1,17 @@
+{% extends 'common/index.html' %}
+
+{% block content %}
+
+    <h1>{{ goal.name }}</h1>
+    <p><strong>Description:</strong> {{ goal.description }}</p>
+    <p><strong>Target Date:</strong> {{ goal.target_date }}</p>
+    <p><strong>Progress:</strong> {{ goal.progress }} calories burned</p>
+    <p><strong>Associated Workouts:</strong></p>
+    <ul>
+        {% for workout in workouts %}
+            <li>{{ workout.name }} - {{ workout.date }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'goal-list' %}">Back</a>
+    
+{% endblock %}

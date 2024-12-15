@@ -25,6 +25,7 @@ urlpatterns = [
     path('accounts/', include('FiTrack.accounts.urls')),
     path('categories/', include('FiTrack.category.urls')),
     path('workouts/', include('FiTrack.workout.urls')),
+    path('goals/', include('FiTrack.goal.urls')),
 ]
 
 if settings.DEBUG:
