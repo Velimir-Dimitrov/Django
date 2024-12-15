@@ -8,7 +8,11 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
-    <a href="{% url 'workout-detail' user_id=workout.account.id pk=workout.pk %}">Cancel</a>
+    {% if workout %}
+        <a href="{% url 'workout-detail' user_id=workout.account.id pk=workout.pk %}">Cancel</a>
+    {% else %}
+        <a href="{% url 'workout-list' %}">Cancel</a>
+    {% endif %}
 </form>
 
 {% endblock %}

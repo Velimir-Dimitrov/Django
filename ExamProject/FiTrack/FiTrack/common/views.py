@@ -1,11 +1,13 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Sum, Count
 from django.views.generic import TemplateView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import requests
 from FiTrack.settings import WEATHER_API_TOKEN
+from FiTrack.workout.models import Workout
+from FiTrack.goal.models import Goal
 
-
-# Create your views here.
 
 
 class HomePage(TemplateView):
@@ -44,3 +46,40 @@ class WeatherAPIView(APIView):
             'description': weather_data['weather'][0]['description'],
             'icon': icon_code
         })
+
+
+
+
+class DashboardView(LoginRequiredMixin, TemplateView):
+    template_name = "common/dashboard.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        # Aggregate data
+        total_workouts = Workout.objects.filter(account=user).count()
+        total_calories = Workout.objects.filter(account=user).aggregate(
+            total=Sum('calories_burned')
+        )['total'] or 0
+
+        recent_workouts = Workout.objects.filter(account=user).order_by('-date')[:5]
+        active_goals = Goal.objects.filter(account=user, is_completed=False)
+        favorite_category = (
+            Workout.objects.filter(account=user)
+            .values('category__name')
+            .annotate(count=Count('category'))
+            .order_by('-count')
+            .first()
+        )
+
+        # Prepare context
+        context.update({
+            'user': user,
+            'total_workouts': total_workouts,
+            'total_calories': total_calories,
+            'recent_workouts': recent_workouts,
+            'active_goals': active_goals,
+            'favorite_category': favorite_category.get('category__name') if favorite_category else 'N/A',
+        })
+        return context
