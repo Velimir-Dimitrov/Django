@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from FiTrack.accounts.forms import AppUserCreationForm, ProfileEditForm, AppUserLoginForm
@@ -17,6 +18,12 @@ class AppUserRegisterView(CreateView):
     form_class = AppUserCreationForm
     template_name = 'accounts/account-create-update.html'
     success_url = reverse_lazy('home')
+
+    def dispatch(self, request, *args, **kwargs):
+        # Check if the user is already authenticated
+        if request.user.is_authenticated:
+            return redirect('home')  # Redirect to home if the user is logged in
+        return super().dispatch(request, *args, **kwargs)
 
 
 class ProfileDeleteView(LoginRequiredMixin, DeleteView):

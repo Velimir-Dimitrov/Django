@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -7,7 +8,7 @@ from .forms import WorkoutForm
 
 UserModel = get_user_model()
 
-class WorkoutListView(ListView):
+class WorkoutListView(LoginRequiredMixin, ListView):
     model = Workout
     template_name = "workouts/workout-list.html"
     context_object_name = "workouts"
@@ -15,7 +16,7 @@ class WorkoutListView(ListView):
     def get_queryset(self):
         return Workout.objects.filter(account=self.request.user)
 
-class WorkoutDetailView(DetailView):
+class WorkoutDetailView(LoginRequiredMixin, DetailView):
     model = Workout
     template_name = "workouts/workout-details.html"
     context_object_name = "workout"
@@ -24,7 +25,7 @@ class WorkoutDetailView(DetailView):
         user = get_object_or_404(UserModel, id=self.kwargs['user_id'])
         return get_object_or_404(Workout, account=user, pk=self.kwargs['pk'])
 
-class WorkoutCreateView(CreateView):
+class WorkoutCreateView(LoginRequiredMixin, CreateView):
     model = Workout
     form_class = WorkoutForm
     template_name = "workouts/workout-create-update.html"
@@ -34,7 +35,7 @@ class WorkoutCreateView(CreateView):
         form.instance.account = self.request.user
         return super().form_valid(form)
 
-class WorkoutUpdateView(UpdateView):
+class WorkoutUpdateView(LoginRequiredMixin, UpdateView):
     model = Workout
     fields = ['name', 'category', 'duration_minutes', 'calories_burned', 'date']
     template_name = "workouts/workout-create-update.html"
@@ -43,7 +44,7 @@ class WorkoutUpdateView(UpdateView):
         user = get_object_or_404(UserModel, id=self.kwargs['user_id'])
         return get_object_or_404(Workout, account=user, pk=self.kwargs['pk'])
 
-class WorkoutDeleteView(DeleteView):
+class WorkoutDeleteView(LoginRequiredMixin, DeleteView):
     model = Workout
     template_name = "workouts/workout-delete.html"
     success_url = reverse_lazy('workout-list')
