@@ -4,7 +4,7 @@
     <div class="main-content form-wrapper">
       <h1>{% if user.is_authenticated  %}Update{% else %}Create{% endif %} account</h1>
 
-      <form method="post" class="form">
+      <form method="post" class="form" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
        <button type="submit" class="btn">Save</button>

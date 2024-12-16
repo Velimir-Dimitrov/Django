@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
@@ -18,23 +19,23 @@ class AppUserRegisterView(CreateView):
     success_url = reverse_lazy('home')
 
 
-class ProfileDeleteView(DeleteView):
+class ProfileDeleteView(LoginRequiredMixin, DeleteView):
     model = Profile
     template_name = 'accounts/account-delete.html'
     success_url = reverse_lazy('login')
 
-    # TO DO: Login required and restriction from accessing this webpage via manually entered URL
 
-class ProfileDetailView(DetailView):
+class ProfileDetailView(LoginRequiredMixin,DetailView):
     model = UserModel
     template_name = 'accounts/account-details.html'
 
-    # TO DO: Login required
 
-class ProfileEditView(UpdateView):
+class ProfileEditView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileEditForm
     template_name = 'accounts/account-create-update.html'
-    success_url = reverse_lazy('profile-details')
 
-    # TO DO: Login required and restriction from accessing this webpage via manually entered URL
+    def get_success_url(self):
+        # Dynamically return the URL based on the updated profile
+        return reverse_lazy('profile-details', kwargs={'pk': self.object.pk})
+

@@ -11,7 +11,6 @@ from FiTrack.goal.models import Goal
 
 
 class HomePage(TemplateView):
-    template_name = 'common/project.html'
 
     def get_template_names(self):  # dynamic way
         if self.request.user.is_authenticated:

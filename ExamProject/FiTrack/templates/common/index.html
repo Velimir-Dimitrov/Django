@@ -14,9 +14,9 @@
                 <a href="{% url 'home' %}" title="FiTrack Logo" class="logo">
                     <img src="/resources/images/logo.png" alt="FiTrack Logo"></a>
             </div>
-                {% if request.user.is_authenticated %}
+                
                 {% include 'common/nav.html' %}
-                {% endif %}
+
         </div>
     </header>
         {% block content %}
