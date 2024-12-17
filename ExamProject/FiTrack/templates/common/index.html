@@ -1,10 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FiTrack</title>
-    <link rel="stylesheet" href="/resources/styles/main.css" />
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
 </head>
 <body>
     <div class="slideshow">
@@ -13,7 +15,7 @@
             <div class="header-content">
                 <div class="logo-wrapper">
                     <a href="{% url 'home' %}" title="FiTrack Logo" class="logo">
-                        <img src="/resources/images/logo.png" alt="FiTrack Logo"></a>
+                        <img src="{% static 'images/logo.png' %}" alt="FiTrack Logo"></a>
                 </div>
                     
                     {% include 'common/nav.html' %}
