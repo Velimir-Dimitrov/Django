@@ -6,7 +6,8 @@
 
       <form method="post" class="form" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form }}
+        {{ form.as_p }}
+
        <button type="submit" class="btn">Save</button>
 
       {% if user.is_authenticated %}

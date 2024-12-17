@@ -12,3 +12,8 @@ class MaxSizeValidator:
         max_size_bytes = self.max_size * 1024 * 1024
         if value.size > max_size_bytes:
             raise ValidationError(self.message)
+
+def validate_image_extension(value):
+    valid_extensions = ['jpg', 'jpeg', 'png', 'gif']
+    if not value.name.split('.')[-1].lower() in valid_extensions:
+        raise ValidationError("Only JPG, JPEG, PNG, and GIF files are allowed.")

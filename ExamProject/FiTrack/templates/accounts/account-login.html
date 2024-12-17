@@ -5,9 +5,7 @@
         <h1>FiTrack</h1>
         <form method="post" class="form">
             {% csrf_token %}
-            {{ form.errors }}
-            {{ form.username}}
-            {{ form.password}}
+            {{ form}}
             <button type="submit" class="btn">Log in</button>
         </form>
     </div>

@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+
+from FiTrack.goal.validators import validate_future_date
 from FiTrack.workout.models import Workout
 
 UserModel = get_user_model()
@@ -27,7 +29,11 @@ class Goal(models.Model):
         null=True
     )
 
-    target_date = models.DateField()
+    target_date = models.DateField(
+        validators=[
+            validate_future_date
+        ]
+    )
 
     is_completed = models.BooleanField(
         default=False

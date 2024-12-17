@@ -20,9 +20,8 @@ class AppUserRegisterView(CreateView):
     success_url = reverse_lazy('home')
 
     def dispatch(self, request, *args, **kwargs):
-        # Check if the user is already authenticated
         if request.user.is_authenticated:
-            return redirect('home')  # Redirect to home if the user is logged in
+            return redirect('home')
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -43,6 +42,5 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
     template_name = 'accounts/account-create-update.html'
 
     def get_success_url(self):
-        # Dynamically return the URL based on the updated profile
         return reverse_lazy('profile-details', kwargs={'pk': self.object.pk})
 

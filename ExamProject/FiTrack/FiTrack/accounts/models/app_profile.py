@@ -3,7 +3,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 from FiTrack.accounts.choices import Genders
-from FiTrack.accounts.validators import MaxSizeValidator
+from FiTrack.accounts.validators import MaxSizeValidator, validate_image_extension
 
 UserModel = get_user_model()
 
@@ -72,7 +72,8 @@ class Profile(models.Model):
         blank=True,
         null=True,
         validators=[
-            MaxSizeValidator(5)
+            MaxSizeValidator(5),
+            validate_image_extension
         ],
     )
 
