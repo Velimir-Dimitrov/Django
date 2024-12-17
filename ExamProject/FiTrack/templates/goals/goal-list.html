@@ -1,17 +1,18 @@
 {% extends 'common/index.html' %}
 
 {% block content %}
-<h1>Your Goals</h1>
-<h1>Your Goals</h1>
-<ul>
-    {% for goal in object_list %}
-        <li>
-            <a href="{% url 'goal-detail' goal.id %}">{{ goal.name }}</a> 
-            - Target: {{ goal.target_date }}
-        </li>
-    {% empty %}
-        <p>You have no goals. <a href="{% url 'goal-create' %}">Create a goal</a> to get started.</p>
-    {% endfor %}
-</ul>
+    <div class="main-content">
+        <h1>Your Goals</h1>
+        <ul class="goals-list">
+            {% for goal in object_list %}
+                <li>
+                    <a href="{% url 'goal-detail' goal.id %}">{{ goal.name }}</a> 
+                    - Target: {{ goal.target_date }}
+                </li>
+            {% empty %}
+                <p>You have no goals. <a href="{% url 'goal-create' %}">Create a goal</a> to get started.</p>
+            {% endfor %}
+        </ul>
+    </div>
 
 {% endblock %}

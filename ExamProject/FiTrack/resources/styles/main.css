@@ -80,12 +80,23 @@ body {
     background: url("/resources/images/profile.png") 0 10px no-repeat;
 }
 
-.nav li a {
+.nav li.logout {
+    background: url("/resources/images/out.png") 0 10px no-repeat;
+}
+
+.nav li a,
+.nav .btn-link {
     display: inline-block;
     vertical-align: middle;
     color: #fff;
     text-decoration: none;
     font: 22px 'Roboto Condensed';
+}
+
+.nav .btn-link {
+    background: none;
+    box-shadow: none;
+    border: none;
 }
 
 .nav li:hover a {
@@ -98,7 +109,7 @@ body {
     width: 50%;
     margin: 50px auto 160px;
     padding: 20px;
-    background-color: #00000099;
+    background-color: #000000bf;
     font: 25px 'Roboto Condensed';
 }
 
@@ -133,6 +144,23 @@ body {
 .btn:hover {
     cursor: pointer;
     color: black;
+}
+
+.goals-list,
+.categories-list {
+    font-size: 28px;
+    line-height: 40px;
+}
+
+.goals-list a,
+.categories-list a {
+    font-style: italic;
+    color: #ff00967a;
+    text-decoration: none;
+}
+
+.goals-list a:hover {
+    text-decoration: underline;
 }
 
 footer {
