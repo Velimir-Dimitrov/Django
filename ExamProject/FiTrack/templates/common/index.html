@@ -6,33 +6,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FiTrack</title>
-    <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}"/>
 </head>
 <body>
-    <div class="slideshow">
-        <div class="image-box__overlay"></div>
-        <header class="header">
-            <div class="header-content">
-                <div class="logo-wrapper">
-                    <a href="{% url 'home' %}" title="FiTrack Logo" class="logo">
-                        <img src="{% static 'images/logo.png' %}" alt="FiTrack Logo"></a>
-                </div>
-                    
-                    {% include 'common/nav.html' %}
-    
+<div class="slideshow">
+    <div class="image-box__overlay"></div>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-wrapper">
+                <a href="{% url 'home' %}" title="FiTrack Logo" class="logo">
+                    <img src="{% static 'images/logo.png' %}" alt="FiTrack Logo"></a>
             </div>
-        </header>
-            {% block content %}
-            {% endblock %}    
-        <footer>
-            <p>&copy; 2024 My Website |
-                <span class="photocredits">Photocredits
+
+            {% include 'common/nav.html' %}
+
+        </div>
+    </header>
+
+    <div id="message-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    {% block content %}
+        
+    {% endblock %}
+    <footer>
+        
+        <p>&copy; 2024 My Website |
+            <span class="photocredits">Photocredits
                     <span class="tooltiptext">
-                        <a class="photo" href="https://www.pexels.com/photo/man-standing-on-bridge-221210/" rel="follow noopener">Man Standing on Bridge</a></li>
+                        <a class="photo" href="https://www.pexels.com/photo/man-standing-on-bridge-221210/"
+                           rel="follow noopener">Man Standing on Bridge</a></li>
                     </span>
                 </span>
-            </p>
-        </footer>
-    </div>
+        </p>
+    </footer>
+</div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const messages = document.getElementById("message-container");
+        if (messages) {
+            setTimeout(() => {
+                messages.style.transition = "opacity 1.5s ease-out";
+                messages.style.opacity = "0";
+                setTimeout(() => messages.remove(), 5000);
+            }, 3000);
+        }
+    });
+</script>
 </html>

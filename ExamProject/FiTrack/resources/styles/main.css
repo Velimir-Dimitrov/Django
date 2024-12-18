@@ -123,6 +123,7 @@ body {
     background: url("/resources/images/out.png") 0 10px no-repeat;
 }
 
+
 .nav li a,
 .nav .btn-link {
     display: inline-block;
@@ -320,4 +321,37 @@ footer {
     .form input {
         min-width: 300px;
     }
+}
+#message-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  max-width: 300px;
+}
+
+.alert {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #fff;
+}
+
+.alert-success {
+  background-color: #28a745;
+}
+
+.alert-error, .alert-danger {
+  background-color: #dc3545;
+}
+
+.alert-warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.alert-info {
+  background-color: #17a2b8;
 }

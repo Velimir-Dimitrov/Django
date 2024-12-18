@@ -3,11 +3,14 @@ from rest_framework.reverse import reverse_lazy
 
 from .forms import GoalForm
 from .models import Goal
+from ..mixins import SuccessMessageMixin
 
-class GoalCreateView(CreateView):
+
+class GoalCreateView(SuccessMessageMixin, CreateView):
     form_class = GoalForm
     template_name = "goals/goal-create.html"
     success_url = reverse_lazy('goal-list')
+    success_message = "Goal created successfully."
 
     def form_valid(self, form):
         form.instance.account = self.request.user

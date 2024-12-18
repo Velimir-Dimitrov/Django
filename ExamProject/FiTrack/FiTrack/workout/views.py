@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 from .models import Workout
 from .forms import WorkoutForm
+from ..mixins import SuccessMessageMixin
 
 UserModel = get_user_model()
 
@@ -25,21 +26,23 @@ class WorkoutDetailView(LoginRequiredMixin, DetailView):
         user = get_object_or_404(UserModel, id=self.kwargs['user_id'])
         return get_object_or_404(Workout, account=user, pk=self.kwargs['pk'])
 
-class WorkoutCreateView(LoginRequiredMixin, CreateView):
+class WorkoutCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Workout
     form_class = WorkoutForm
     template_name = "workouts/workout-create-update.html"
     success_url = reverse_lazy('workout-list')
+    success_message = "Workout created!"
 
     def form_valid(self, form):
         form.instance.account = self.request.user
         return super().form_valid(form)
 
-class WorkoutUpdateView(LoginRequiredMixin, UpdateView):
+class WorkoutUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Workout
     fields = ['name', 'category', 'duration_minutes', 'calories_burned', 'date']
     template_name = "workouts/workout-create-update.html"
     success_url = reverse_lazy('workout-list')
+    success_message = "Workout successfully updated!"
 
     def get_object(self, queryset=None):
         user = get_object_or_404(UserModel, id=self.kwargs['user_id'])
