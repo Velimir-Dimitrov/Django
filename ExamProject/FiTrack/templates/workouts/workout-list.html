@@ -3,7 +3,7 @@
 {% block content %}
     <div class="main-content form-wrapper">
         <h1>Your Workouts</h1>
-        <ul>
+        <ul class="workout-list">
             {% for workout in workouts %}
                 <li>
                     <a href="{% url 'workout-detail' user_id=workout.account.id pk=workout.pk %}">

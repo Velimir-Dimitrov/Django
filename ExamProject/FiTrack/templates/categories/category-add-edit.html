@@ -3,11 +3,11 @@
 {% block content %}
     <div class="main-content form-wrapper">
         <h1>{% if object %}Edit{% else %}Add a new {% endif %} workout category</h1>
-        <form method="post">
+        <form method="post" class="form">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Save Category</button>
+            <button type="submit" class="btn">Save Category</button>
         </form>
-        <a href="{% url 'category_list' %}">Back to category list</a>
+        <a href="{% url 'category_list' %}" class="btn-link">Back to category list</a>
     </div>
 {% endblock %}

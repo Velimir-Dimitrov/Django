@@ -2,7 +2,7 @@
     <ul class="nav">
         {% if request.user.is_authenticated %}
             <li class="home"><a href="{% url 'home' %}" title="Home" class="selected current">Home</a></li>
-            <li class="statistics"><a href="{% url 'dashboard' %}" title="Dashboard"
+            <li class="dashboard"><a href="{% url 'dashboard' %}" title="Dashboard"
                                       class="selected current">Dashboard</a></li>
             <li class="profile"><a href="{% url 'profile-details' user.pk %}" title="Profile" class="selected current">My
                 Profile </a></li>
@@ -13,7 +13,7 @@
                 </form>
             </li>
         {% else %}
-            <li class="signin"><a href="{% url 'login' %}" title="Sign In" class="selected current">Sign In</a></li>
+            <li class="login"><a href="{% url 'login' %}" title="Sign In" class="selected current">Sign In</a></li>
         {% endif %}
     </ul>
 </div>

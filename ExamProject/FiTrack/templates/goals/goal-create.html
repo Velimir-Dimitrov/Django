@@ -1,13 +1,13 @@
 {% extends 'common/index.html' %}
 
 {% block content %}
-    <div class="main-content form-wrapper">
+    <div class="main-content form-wrapper form-goals">
         <h2>Create a New Goal</h2>
 
         <form method="post" class="form">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Create Goal</button>
+            <button type="submit" class="btn">Create Goal</button>
         </form>
     </div>
 {% endblock %}

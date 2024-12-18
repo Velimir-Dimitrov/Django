@@ -9,47 +9,44 @@
     <link rel="stylesheet" href="{% static 'styles/main.css' %}"/>
 </head>
 <body>
-<div class="slideshow">
-    <div class="image-box__overlay"></div>
-    <header class="header">
-        <div class="header-content">
-            <div class="logo-wrapper">
-                <a href="{% url 'home' %}" title="FiTrack Logo" class="logo">
-                    <img src="{% static 'images/logo.png' %}" alt="FiTrack Logo"></a>
-            </div>
-
-            {% include 'common/nav.html' %}
-
-        </div>
-    </header>
-
-        <div id="message-container">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
-
-        {% block content %}
-
-        {% endblock %}
+    <div class="background-overlay"></div>
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-wrapper">
+                    <a href="{% url 'home' %}" title="FiTrack Logo" class="logo">
+                        <img src="{% static 'images/logo.png' %}" alt="FiTrack Logo"></a>
+                </div>
     
-    <footer>
-
-        <p>&copy; 2024 My Website |
-            <span class="photocredits">Photocredits
-                    <span class="tooltiptext">
-                        <a class="photo" href="https://www.pexels.com/photo/man-standing-on-bridge-221210/"
-                           rel="follow noopener">Man Standing on Bridge</a></li>
+                {% include 'common/nav.html' %}
+    
+            </div>
+        </header>
+        <main>
+            <div id="message-container">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+    
+            {% block content %}
+    
+            {% endblock %}
+        </main>
+        <footer>    
+            <p>&copy; 2024 My Website |
+                <span class="photocredits">Photocredits
+                        <span class="tooltiptext">
+                            <a class="photo" href="https://www.pexels.com/photo/man-standing-on-bridge-221210/"
+                               rel="follow noopener">Man Standing on Bridge</a></li>
+                        </span>
                     </span>
-                </span>
-            <a href="{% url 'faq-manager' %}">FAQs</a>
-        </p>
-    </footer>
-</div>
+                <a href="{% url 'faq-manager' %}">FAQs</a>
+            </p>
+        </footer>
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", function () {

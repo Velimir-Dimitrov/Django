@@ -2,14 +2,12 @@
 
 {% block content %}
 
-    <div class="main-content dashboard">
-        <div>
-            <h1>Welcome, {{ request.user.profile }}!</h1>
-            <p>Your fitness journey at a glance:</p>
-        </div>
-    
-        <section class="overview">
-            <h2>Quick Stats</h2>
+    <div class="main-content metrics-overview">
+       <section>
+            <h1>Welcome, <br/> {{ request.user.profile }}!</h1>  
+       </section>  
+        <section>
+            <h2>Your fitness journey at a glance:</h2>
             <ul>
                 <li>Total Workouts: {{ total_workouts }}</li>
                 <li>Total Calories Burned: {{ total_calories }}</li>
@@ -17,7 +15,13 @@
                 <li>Favorite Category: {{ favorite_category }}</li>
             </ul>
         </section>
-    
+         <div class="btns-wrapper">
+            <a href="{% url 'workout-create' %}" class="btn">Log Workout</a>
+            <a href="{% url 'goal-create' %}" class="btn">Set Goal</a>
+        </div>    
+    </div>   
+
+    <div class="main-content metric">
         <section class="recent-workouts">
             <h2>Recent Workouts</h2>
             <ul>
@@ -31,8 +35,10 @@
                 {% endfor %}
             </ul>
         </section>
-    
-        <section class="goals">
+    </div>
+
+    <div class="main-content metric">
+         <section class="goals">
             <h2>Active Goals</h2>
             <ul>
                 {% for goal in active_goals %}
@@ -47,32 +53,7 @@
                 {% endfor %}
             </ul>
         </section>
-    
-        <section class="actions">
-            <h2>Quick Actions</h2>
-            <a href="{% url 'workout-create' %}" class="btn">Log Workout</a>
-            <a href="{% url 'goal-create' %}" class="btn">Set Goal</a>
-        </section>
-    
-        <section class="charts">
-            <h2>Workout Trends</h2>
-            <canvas id="workoutChart"></canvas>
-            <script>
-                const ctx = document.getElementById('workoutChart').getContext('2d');
-                const workoutChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], // Replace with dynamic data
-                        datasets: [{
-                            label: 'Calories Burned',
-                            data: [200, 300, 250, 400, 450, 300, 500], // Replace with dynamic data
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            tension: 0.4,
-                        }]
-                    },
-                    options: {}
-                });
-            </script>
-        </section>
     </div>
+
+   
 {% endblock %}

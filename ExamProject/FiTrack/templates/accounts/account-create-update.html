@@ -1,7 +1,7 @@
 {% extends 'common/index.html' %}
 
 {% block content %}
-    <div class="main-content form-wrapper">
+    <div class="main-content form-wrapper {% if user.is_authenticated %}form-update-account{% else %}form-create-account{% endif %}">
         <h1>{% if user.is_authenticated %}Update{% else %}Create{% endif %} account</h1>
 
         <form method="post" class="form" enctype="multipart/form-data">
@@ -11,8 +11,9 @@
             <button type="submit" class="btn">Save</button>
 
             {% if user.is_authenticated %}
-                <p class="update-msg">Don't want to update your account? <a href="{% url 'profile-details' user.pk %}">Go
-                    back to your profile</a></p>
+                <p>Don't want to update your account? 
+                    <a href="{% url 'profile-details' user.pk %}" class="btn-link">Go back to your profile</a>
+                </p>
             {% endif %}
 
         </form>
