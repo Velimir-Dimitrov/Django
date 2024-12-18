@@ -12,6 +12,12 @@ UserModel = get_user_model()
 class AppUserLoginView(LoginView):
     template_name = 'accounts/account-login.html'
     form_class = AppUserLoginForm
+    success_url = reverse_lazy('home')
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
 
 class AppUserRegisterView(CreateView):
     model = UserModel

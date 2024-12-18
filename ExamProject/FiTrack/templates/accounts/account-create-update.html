@@ -2,19 +2,20 @@
 
 {% block content %}
     <div class="main-content form-wrapper">
-      <h1>{% if user.is_authenticated  %}Update{% else %}Create{% endif %} account</h1>
+        <h1>{% if user.is_authenticated %}Update{% else %}Create{% endif %} account</h1>
 
-      <form method="post" class="form" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
+        <form method="post" class="form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
 
-       <button type="submit" class="btn">Save</button>
+            <button type="submit" class="btn">Save</button>
 
-      {% if user.is_authenticated %}
-        <p class="update-msg">Don't want to update your account? <a href="{% url 'profile-details' user.pk %}">Go back to your profile</a></p>
-      {% endif %}
+            {% if user.is_authenticated %}
+                <p class="update-msg">Don't want to update your account? <a href="{% url 'profile-details' user.pk %}">Go
+                    back to your profile</a></p>
+            {% endif %}
 
-      </form>
-     </div>
-    
+        </form>
+    </div>
+
 {% endblock %}

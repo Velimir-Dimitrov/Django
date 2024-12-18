@@ -39,6 +39,7 @@ class WorkoutUpdateView(LoginRequiredMixin, UpdateView):
     model = Workout
     fields = ['name', 'category', 'duration_minutes', 'calories_burned', 'date']
     template_name = "workouts/workout-create-update.html"
+    success_url = reverse_lazy('workout-list')
 
     def get_object(self, queryset=None):
         user = get_object_or_404(UserModel, id=self.kwargs['user_id'])
