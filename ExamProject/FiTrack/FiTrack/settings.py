@@ -31,6 +31,15 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+MY_APPS = [
+    'FiTrack.accounts.apps.AccountsConfig',
+    'FiTrack.workout.apps.WorkoutConfig',
+    'FiTrack.goal.apps.GoalConfig',
+    'FiTrack.common.apps.ProgressConfig',
+    'FiTrack.category.apps.CategoryConfig',
+    'rest_framework',
+]
+
 
 INSTALLED_APPS = [
     "unfold",
@@ -42,13 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'FiTrack.accounts.apps.AccountsConfig',
-    'FiTrack.workout.apps.WorkoutConfig',
-    'FiTrack.goal.apps.GoalConfig',
-    'FiTrack.common.apps.ProgressConfig',
-    'FiTrack.category.apps.CategoryConfig',
-    'rest_framework'
-]
+] + MY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -133,10 +136,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'resources/'
-
 STATICFILES_DIRS = [
     BASE_DIR / "resources"
 ]
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'mediafiles/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -147,8 +152,11 @@ AUTH_USER_MODEL = 'accounts.AppUser'
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'mediafiles/'
-
 
 WEATHER_API_TOKEN = config('WEATHER_API_TOKEN')
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',  # Only JSON responses
+    ],
+}

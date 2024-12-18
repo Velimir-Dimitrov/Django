@@ -23,21 +23,22 @@
         </div>
     </header>
 
-    <div id="message-container">
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
+        <div id="message-container">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
 
-    {% block content %}
-        
-    {% endblock %}
+        {% block content %}
+
+        {% endblock %}
+    
     <footer>
-        
+
         <p>&copy; 2024 My Website |
             <span class="photocredits">Photocredits
                     <span class="tooltiptext">
@@ -45,6 +46,7 @@
                            rel="follow noopener">Man Standing on Bridge</a></li>
                     </span>
                 </span>
+            <a href="{% url 'faq-manager' %}">FAQs</a>
         </p>
     </footer>
 </div>

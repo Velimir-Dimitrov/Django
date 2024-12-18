@@ -1,0 +1,28 @@
+{% extends 'common/index.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main-content form-wrapper">
+
+        <h1>Frequently asked questions</h1>
+        
+        <ul id="faq-list"></ul>
+       
+        <h2>Ask a question</h2>
+
+        <form id="faq-form">
+            {% csrf_token %}
+            <input type="hidden" id="faq-id">
+            <label for="question">Question:</label>
+            <input type="text" id="question" required>
+
+                <label for="answer">Answer:</label>
+                <textarea id="answer" required></textarea>
+
+
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+    <script src="{% static 'js/faq_manager.js' %}"></script>
+{% endblock %}

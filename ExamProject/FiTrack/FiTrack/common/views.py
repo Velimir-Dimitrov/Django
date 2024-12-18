@@ -1,9 +1,14 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum, Count
 from django.views.generic import TemplateView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import requests
+from rest_framework.viewsets import ModelViewSet
+
+from FiTrack.common.models import FAQ
+from FiTrack.common.serializers import FAQSerializer
 from FiTrack.settings import WEATHER_API_TOKEN
 from FiTrack.workout.models import Workout
 from FiTrack.goal.models import Goal
@@ -47,8 +52,6 @@ class WeatherAPIView(APIView):
         })
 
 
-
-
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = "common/dashboard.html"
 
@@ -81,4 +84,17 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             'active_goals': active_goals,
             'favorite_category': favorite_category.get('category__name') if favorite_category else 'N/A',
         })
+        return context
+
+class FAQViewSet(ModelViewSet):
+    queryset = FAQ.objects.all()
+    serializer_class = FAQSerializer
+    permission_classes = [IsAuthenticated]
+
+class FAQPageView(TemplateView):
+    template_name = 'common/faq-manager.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['faqs'] = FAQ.objects.all()  # Pass FAQ data to your template
         return context
