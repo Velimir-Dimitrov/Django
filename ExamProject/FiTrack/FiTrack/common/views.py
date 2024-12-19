@@ -19,9 +19,14 @@ class HomePage(TemplateView):
 
     def get_template_names(self):  # dynamic way
         if self.request.user.is_authenticated:
-            return ['common/index_logged_in.html']
+            return ['common/index-logged.html']
         else:
-            return ['common/index_logged_out.html']
+            return ['common/index-logged-out.html']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_homepage'] = True
+        return context
 
 
 class WeatherAPIView(APIView):

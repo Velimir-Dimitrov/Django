@@ -1,4 +1,4 @@
-        // Fetch browser location
+
         navigator.geolocation.getCurrentPosition(
             function(position) {
                 const latitude = position.coords.latitude;
@@ -10,7 +10,6 @@
                     .then(data => {
     const weatherElement = document.getElementById('weather');
 
-    // Clear the content initially (in case there was a loading message)
     weatherElement.innerHTML = '';
 
     if (data.error) {
@@ -25,11 +24,11 @@
             'rain', 'shower', 'storm', 'snow', 'mist', 'thunderstorm'
         ];
 
-        // Define temperature thresholds
-        const maxOutdoorTemp = 24; // Best highest temperature for outdoor activities
-        const minOutdoorTemp = 4;  // Best lowest temperature for outdoor activities
 
-        // Basic advice on whether to stay inside or outside based on weather
+        const maxOutdoorTemp = 24;
+        const minOutdoorTemp = 4;
+
+
         let weatherMessage = '';
 
 
@@ -43,7 +42,7 @@
             weatherMessage = "The weather is fine, but use your best judgment!";
         }
 
-        // Create and append elements
+
         const locationElement = document.createElement('p');
         locationElement.innerHTML = `<strong>Your location:</strong> ${data.location}`;
         weatherElement.appendChild(locationElement);

@@ -1,14 +1,14 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const faqForm = document.getElementById("faq-form");
     const faqList = document.getElementById("faq-list");
     const faqIdField = document.getElementById("faq-id");
     const questionField = document.getElementById("question");
     const answerField = document.getElementById("answer");
-    const csrfTokenField = document.getElementById("csrf-token"); // Get the hidden CSRF token field
+    const csrfTokenField = document.getElementById("csrf-token"); // CSRF token hidden field
 
     const API_URL = "/faq/api/";
 
-    // Function to get CSRF token from hidden field
+    // Function to get CSRF token
     function getCSRFToken() {
         return csrfTokenField.value;
     }
@@ -21,16 +21,36 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!response.ok) throw new Error("Failed to fetch FAQs");
 
             const faqs = await response.json();
+
             faqs.forEach((faq) => {
                 const li = document.createElement("li");
                 li.dataset.id = faq.id;
-                li.innerHTML = `
-                    <strong>${faq.question}</strong>
-                    <p>${faq.answer}</p>
-                    ${USER_IS_SUPERUSER ? `
-                    <button class="edit-faq">Edit</button>
-                    <button class="delete-faq">Delete</button>
-                ` : ''}`
+
+                const question = document.createElement("strong");
+                question.textContent = faq.question;
+
+                const answer = document.createElement("p");
+                answer.textContent = faq.answer || "";
+
+                li.appendChild(question);
+                li.appendChild(answer);
+
+                // Conditionally add Edit and Delete buttons
+                if (USER_IS_SUPERUSER) {
+                    const editButton = document.createElement("button");
+                    editButton.textContent = "Edit";
+                    editButton.classList.add("edit-faq");
+                    editButton.addEventListener("click", () => editFAQ(faq));
+
+                    const deleteButton = document.createElement("button");
+                    deleteButton.textContent = "Delete";
+                    deleteButton.classList.add("delete-faq");
+                    deleteButton.addEventListener("click", () => deleteFAQ(faq.id));
+
+                    li.appendChild(editButton);
+                    li.appendChild(deleteButton);
+                }
+
                 faqList.appendChild(li);
             });
         } catch (error) {
@@ -68,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             faqForm.reset();
             faqIdField.value = ""; // Clear the hidden field
-            loadFAQs();
+            await loadFAQs();
         } catch (error) {
             console.error("Error saving FAQ:", error);
             alert("An error occurred while saving the FAQ.");
@@ -76,48 +96,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Edit FAQ
-    faqList.addEventListener("click", (e) => {
-        if (e.target.classList.contains("edit-faq")) {
-            const li = e.target.closest("li");
-            const id = li.dataset.id;
-            const question = li.querySelector("strong").textContent;
-            const answer = li.querySelector("p").textContent;
-
-            faqIdField.value = id;
-            questionField.value = question;
-            answerField.value = answer;
-        }
-    });
+    function editFAQ(faq) {
+        faqIdField.value = faq.id;
+        questionField.value = faq.question;
+        if (answerField) answerField.value = faq.answer || "";
+    }
 
     // Delete FAQ
-    faqList.addEventListener("click", async (e) => {
-        if (e.target.classList.contains("delete-faq")) {
-            const li = e.target.closest("li");
-            const id = li.dataset.id;
+    async function deleteFAQ(id) {
+        if (confirm("Are you sure you want to delete this FAQ?")) {
+            try {
+                const csrfToken = getCSRFToken(); // Get CSRF token
+                const response = await fetch(`${API_URL}${id}/`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": csrfToken,
+                    },
+                });
 
-            if (confirm("Are you sure you want to delete this FAQ?")) {
-                try {
-                    const csrfToken = getCSRFToken(); // Get CSRF token
-                    const response = await fetch(`${API_URL}${id}/`, {
-                        method: "DELETE",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRFToken": csrfToken,
-                        },
-                    });
+                if (!response.ok) throw new Error("Failed to delete FAQ");
 
-                    if (!response.ok) throw new Error("Failed to delete FAQ");
-
-                    loadFAQs(); // Reload the FAQ list after deletion
-                } catch (error) {
-                    console.error("Error deleting FAQ:", error);
-                    alert("An error occurred while deleting the FAQ.");
-                }
+                await loadFAQs(); // Reload the FAQ list after deletion
+            } catch (error) {
+                console.error("Error deleting FAQ:", error);
+                alert("An error occurred while deleting the FAQ.");
             }
         }
-    });
+    }
 
     // Initial load
-    loadFAQs();
+    await loadFAQs();
 });
-

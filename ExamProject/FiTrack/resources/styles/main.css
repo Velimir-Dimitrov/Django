@@ -5,20 +5,18 @@ body {
     margin: 0;
     color: white;
     font-family: 'Roboto Condensed', sans-serif;
-    background: url('/resources/images/running-background.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
-.body-home {
-    background: black;
+.body-bg {
+    background: url('/resources/images/running-background.jpg') no-repeat;
+    background-size: cover;
 }
 
   .slideshow {
             height: 99vh;
             width: 99vw;
             position: relative;
-            overflow: auto;
+            overflow: hidden;
         }
 
         @keyframes slideShow {
@@ -32,7 +30,7 @@ body {
         .slideshow::before {
             content: "";
             position: absolute;
-            top: 0;
+            top: -25px;
             left: 0;
             width: 100%;
             height: 100%;
@@ -286,6 +284,10 @@ footer {
     font-size: 20px;
 }
 
+.form-details strong {
+    color: #ff00967a;
+}
+
 .form-details {
     width: 30%;
 }
@@ -384,15 +386,31 @@ footer {
         text-align: center;
      }
 
-    body {
+    .form input {
+        min-width: 300px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .slideshow,
+    .body-bg {
         background: grey;
         text-align: center;
     }
+
+    @keyframes slideShow {
+            0% { background-image: none; }
+            25% { background-image: none; }
+            50% { background-image: none; }
+            75% { background-image: none; }
+            100% { background-image: none; }
+        }
 
     .form input {
         min-width: 300px;
     }
 }
+
 #message-container {
   position: fixed;
   top: 20px;

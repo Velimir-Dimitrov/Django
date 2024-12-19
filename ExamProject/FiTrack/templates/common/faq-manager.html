@@ -3,11 +3,11 @@
 
 {% block content %}
     <div class="main-content form-wrapper">
-        <h1>Frequently Asked Questions</h1>
+        <h1>Ask Us</h1>
 
         <ul id="faq-list"></ul>
 
-        <h2>Ask a Question</h2>
+
         <form id="faq-form">
             {% csrf_token %}
             <input type="hidden" id="csrf-token" value="{{ csrf_token }}">
