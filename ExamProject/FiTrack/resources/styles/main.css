@@ -305,7 +305,7 @@ footer {
 .form input,
 .form select {
     display: block;
-    margin: 10px auto 5px;
+    margin: 10px auto 10px;
     height: 35px;
     min-width: 360px;
 }
@@ -335,6 +335,7 @@ footer {
 
 .form-small .form > p {
     max-width: 370px;
+    margin: 0 auto;
 }
 
 .form .btn {
@@ -379,35 +380,9 @@ footer {
     background: grey;
 }
 
-@media only screen and (max-width: 992px) {
-     .main-content {
-        width: 100%;
-        text-align: center;
-     }
-
-    .form input {
-        min-width: 300px;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .slideshow,
-    .body-bg {
-        background: grey;
-        text-align: center;
-    }
-
-    @keyframes slideShow {
-            0% { background-image: none; }
-            25% { background-image: none; }
-            50% { background-image: none; }
-            75% { background-image: none; }
-            100% { background-image: none; }
-        }
-
-    .form input {
-        min-width: 300px;
-    }
+.error-list {
+    color: #dc3545;
+    text-align: center;
 }
 
 #message-container {
@@ -427,19 +402,81 @@ footer {
   color: #fff;
 }
 
-.alert-success {
-  background-color: #28a745;
+    .alert-success {
+      background-color: #28a745;
+    }
+
+    .alert-error, .alert-danger {
+      background-color: #dc3545;
+    }
+
+    .alert-warning {
+      background-color: #ffc107;
+      color: #212529;
+    }
+
+    .alert-info {
+      background-color: #17a2b8;
+    }
+
+@media only screen and (max-width: 1480px) {
+    .form-small {
+        width: 40%;
+    }
+
+    .form-details {
+        width: 60%;
+    }
+
+    .form-delete {
+        width: 40%;
+    }
 }
 
-.alert-error, .alert-danger {
-  background-color: #dc3545;
+@media only screen and (max-width: 992px) {
+     .main-content {
+        width: 100%;
+        text-align: center;
+     }
+
+    .metrics-overview section {
+        width: 100%;
+    }
 }
 
-.alert-warning {
-  background-color: #ffc107;
-  color: #212529;
-}
+@media only screen and (max-width: 768px) {
+    .slideshow,
+    .body-bg {
+        background: grey;
+        text-align: center;
+    }
 
-.alert-info {
-  background-color: #17a2b8;
+    .form input {
+        min-width: 300px;
+    }
+
+    .header {
+        margin: 0 auto;
+    }
+
+    .logo-wrapper, .nav-wrapper {
+        width: 100%;
+    }
+
+    .logo-wrapper img {
+        top: 0;
+        position: relative;
+    }
+
+    @keyframes slideShow {
+            0% { background-image: none; }
+            25% { background-image: none; }
+            50% { background-image: none; }
+            75% { background-image: none; }
+            100% { background-image: none; }
+        }
+
+    .form input {
+        min-width: 300px;
+    }
 }

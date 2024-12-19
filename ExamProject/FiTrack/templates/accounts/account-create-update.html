@@ -6,7 +6,20 @@
 
         <form method="post" class="form" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
+        
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="error-list">
+                            {% for error in field.errors %}
+                                <p class="error-message">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
 
             <button type="submit" class="btn">Save</button>
 

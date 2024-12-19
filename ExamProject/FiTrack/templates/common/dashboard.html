@@ -5,6 +5,10 @@
     <div class="main-content metrics-overview">
        <section>
             <h1>Welcome, <br/> {{ request.user.profile }}!</h1>  
+           <div class="btns-wrapper">
+                <a href="{% url 'workout-create' %}" class="btn">Log Workout</a>
+                <a href="{% url 'goal-create' %}" class="btn">Set Goal</a>
+            </div>
        </section>
         <section>
             <h2>Your fitness journey at a glance:</h2>
@@ -42,11 +46,7 @@
                             <p>No active goals. <a href="{% url 'goal-create' %}">Create one</a>.</p>
                         {% endfor %}
                     </ul>
-                </section>
-            <div class="btns-wrapper">
-                <a href="{% url 'workout-create' %}" class="btn">Log Workout</a>
-                <a href="{% url 'goal-create' %}" class="btn">Set Goal</a>
-            </div>
+                </section>            
     </div>  
 
    
