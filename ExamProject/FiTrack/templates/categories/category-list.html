@@ -3,11 +3,20 @@
 {% block content %}
     <div class="main-content">
         <h1>Workout Categories</h1>
-            <ul class="categories-list">
-                {% for category in categories %}
-                    <li>{{ category.name }} - <a href="{% url 'edit_category' category.pk %}">Edit</a></li>
-                {% endfor %}
-            </ul>
-        <a href="{% url 'add_category' %}" class="btn">Add category</a>
+        
+        <ul class="categories-list">
+            {% for category in categories %}
+                <li>
+                    {{ category.name }}
+                    {% if user.is_superuser %}
+                        - <a href="{% url 'edit_category' category.pk %}">Edit</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if user.is_superuser %}
+            <a href="{% url 'add_category' %}" class="btn">Add category</a>
+        {% endif %}
     </div>
 {% endblock %}
