@@ -10,44 +10,55 @@
 </head>
 
 <body {% if is_homepage %} class="slideshow" {% else %} class="body-bg"{% endif %}>
-    <div {% if is_homepage %} class="slideshow-overlay" {% else %}class="background-overlay" {% endif %}></div>
-        <header class="header">
-            <div class="header-content">
-                <div class="logo-wrapper">
-                    <a href="{% url 'home' %}" title="FiTrack Logo" class="logo">
-                        <img src="{% static 'images/logo.png' %}" alt="FiTrack Logo"></a>
+<div {% if is_homepage %} class="slideshow-overlay" {% else %}class="background-overlay" {% endif %}></div>
+<header class="header">
+    <div class="header-content">
+        <div class="logo-wrapper">
+            <a href="{% url 'home' %}" title="FiTrack Logo" class="logo">
+                <img src="{% static 'images/logo.png' %}" alt="FiTrack Logo"></a>
+        </div>
+
+        {% include 'common/nav.html' %}
+
+    </div>
+</header>
+<main>
+    <div id="message-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+                    {{ message }}
                 </div>
-    
-                {% include 'common/nav.html' %}
-    
-            </div>
-        </header>
-        <main>
-            <div id="message-container">
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            </div>
-    
-            {% block content %}
-    
-            {% endblock %}
-        </main>
-        <footer>    
-            <p>&copy; 2024 My Website |
-                <span class="photocredits">Photocredits
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    {% block content %}
+
+    {% endblock %}
+</main>
+<footer>
+    <p>&copy; 2024 My Website |
+
+        {% if user.is_authenticated %}<a href="{% url 'faq-manager' %}">Ask Us</a>{% endif %}
+        <span class="photocredits"> | Photocredits
                         <span class="tooltiptext">
+                            <a class="photo" href="https://www.pexels.com/photo/overhead-shot-of-dumbbells-and-a-clipboard-8155166/"
+                               rel="follow noopener">Overhead Shot of Dumbbells and a Clipboard</a>
                             <a class="photo" href="https://www.pexels.com/photo/man-standing-on-bridge-221210/"
-                               rel="follow noopener">Man Standing on Bridge</a></li>
+                               rel="follow noopener">Man Standing on Bridge</a>
+                            <a class="photo" href="https://www.pexels.com/photo/woman-doing-push-ups-2780762/"
+                               rel="follow noopener">Woman Doing Push-Ups</a>
+                            <a class="photo" href="https://www.pexels.com/photo/person-swimming-on-body-of-water-863988/"
+                               rel="follow noopener">Person Swimming on Body of Water</a>
+                            <a class="photo" href="https://www.pexels.com/photo/sportive-woman-with-bicycle-resting-on-countryside-road-in-sunlight-3771836/"
+                               rel="follow noopener">Sportive woman with bicycle resting on countryside road in sunlight</a>
+                            <a class="photo" href="https://www.pexels.com/photo/person-holding-barbell-841130/"
+                               rel="follow noopener">Person Holding Barbell</a>
                         </span>
-                    </span>
-                <a href="{% url 'faq-manager' %}">Ask Us</a>
-            </p>
-        </footer>
+        </span>
+    </p>
+</footer>
 </body>
 <script src="{% static 'js/notifications.js' %}"></script>
 </html>

@@ -18,36 +18,38 @@
                 <li>Active Goals: {{ active_goals.count }}</li>
                 <li>Favorite Category: {{ favorite_category }}</li>
             </ul>
-        </section>         
+        </section>
+    </div>  
+    <div class="main-content metrics-overview">
         <section class="recent-workouts">
-                <h2>Recent Workouts</h2>
+            <h2>Recent Workouts</h2>
+            <ul>
+                {% for workout in recent_workouts %}
+                    <li>
+                        {{ workout.date }} - {{ workout.name }} ({{ workout.category.name }})
+                        - {{ workout.calories_burned }} kcal
+                    </li>
+                {% empty %}
+                    <p>No workouts logged recently.</p>
+                {% endfor %}
+            </ul>
+        </section>
+        <section class="goals">
+                <h2>Active Goals</h2>
                 <ul>
-                    {% for workout in recent_workouts %}
+                    {% for goal in active_goals %}
                         <li>
-                            {{ workout.date }} - {{ workout.name }} ({{ workout.category.name }})
-                            - {{ workout.calories_burned }} kcal
+                            <strong>{{ goal.name }}</strong> - {{ goal.target_date }}
+                            <div class="progress">
+                                <div class="progress-bar" style="width: {{ goal.progress_percentage }}%;"></div>
+                            </div>
                         </li>
                     {% empty %}
-                        <p>No workouts logged recently.</p>
+                        <p>No active goals. <a href="{% url 'goal-create' %}">Create one</a>.</p>
                     {% endfor %}
                 </ul>
-            </section>
-            <section class="goals">
-                    <h2>Active Goals</h2>
-                    <ul>
-                        {% for goal in active_goals %}
-                            <li>
-                                <strong>{{ goal.name }}</strong> - {{ goal.target_date }}
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: {{ goal.progress_percentage }}%;"></div>
-                                </div>
-                            </li>
-                        {% empty %}
-                            <p>No active goals. <a href="{% url 'goal-create' %}">Create one</a>.</p>
-                        {% endfor %}
-                    </ul>
-                </section>            
-    </div>  
+            </section>      
+    </div>
 
    
 {% endblock %}
