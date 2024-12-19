@@ -329,13 +329,11 @@ footer {
     margin: 0 auto;
 }
 
-.form-goals,
-.form-create-account {
-    width: 30%;
+.form-small {
+    width: 25%;
 }
 
-.form-goals .form > p,
-.form-create-account .form > p {
+.form-small .form > p {
     max-width: 370px;
 }
 
@@ -357,7 +355,8 @@ footer {
 .form-details .btn,
 .form-delete .btn,
 .btn-delete,
-.dashboard .btn {
+.dashboard .btn,
+.btns-wrapper .btn {
     display: inline-block;
     margin: 0 10px 10px 0;
 }

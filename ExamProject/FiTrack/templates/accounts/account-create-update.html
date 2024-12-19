@@ -1,7 +1,7 @@
 {% extends 'common/index.html' %}
 
 {% block content %}
-    <div class="main-content form-wrapper {% if user.is_authenticated %}form-update-account{% else %}form-create-account{% endif %}">
+    <div class="main-content form-wrapper form-small">
         <h1>{% if user.is_authenticated %}Update{% else %}Create{% endif %} account</h1>
 
         <form method="post" class="form" enctype="multipart/form-data">

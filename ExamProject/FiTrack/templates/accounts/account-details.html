@@ -2,16 +2,17 @@
 
 {% block content %}
     <div class="main-content form-details">
-      <h2>Your Profile</h2>
-    
+        <h2>Your Profile</h2>
+
         <div class="profile-image">
-            {% if request.user.profile.profile_picture %}            
-            <img src="{{ request.user.profile.profile_picture.url }}" alt="Profile Picture" width="150">
-            <p><strong>Profile Picture:</strong></p>
-          {% else %}
-            <p>No profile picture set.</p>
-          {% endif %}
-        </div>    
+            {% if request.user.profile.profile_picture %}
+                <p><strong>Profile Picture:</strong></p>
+                <img src="{{ request.user.profile.profile_picture.url }}" alt="Profile Picture" width="150">
+
+            {% else %}
+                <p>No profile picture set.</p>
+            {% endif %}
+        </div>
         <div class="profile-content">
             <p><strong>Full Name:</strong> {{ request.user.profile }} </p>
             <p><strong>Gender:</strong> {{ request.user.profile.gender }}</p>
@@ -21,10 +22,10 @@
             <p><strong>Bio:</strong> {{ request.user.profile.bio }}</p>
         </div>
 
-      <hr>
-     <div class="btns-wrapper">
-        <a href="{% url 'profile-edit' user.pk %}" class="btn">Edit</a>
-        <a href="{% url 'profile-delete' user.pk %}" class="btn btn-secondary">Delete</a>
-     </div>
+        <hr>
+        <div class="btns-wrapper">
+            <a href="{% url 'profile-edit' user.pk %}" class="btn">Edit</a>
+            <a href="{% url 'profile-delete' user.pk %}" class="btn btn-secondary">Delete</a>
+        </div>
     </div>
 {% endblock %}
