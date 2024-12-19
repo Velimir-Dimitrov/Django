@@ -8,12 +8,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const API_URL = "/faq/api/";
 
-    // Function to get CSRF token
     function getCSRFToken() {
         return csrfTokenField.value;
     }
 
-    // Fetch and display FAQs
     async function loadFAQs() {
         faqList.innerHTML = ""; // Clear the list
         try {
@@ -35,7 +33,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 li.appendChild(question);
                 li.appendChild(answer);
 
-                // Conditionally add Edit and Delete buttons
                 if (USER_IS_SUPERUSER) {
                     const editButton = document.createElement("button");
                     editButton.textContent = "Edit";
@@ -58,7 +55,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // Handle form submission
     faqForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const id = faqIdField.value;
@@ -81,13 +77,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                     "Content-Type": "application/json",
                     "X-CSRFToken": csrfToken,
                 },
-                body: JSON.stringify({ question, answer }),
+                body: JSON.stringify({question, answer}),
             });
 
             if (!response.ok) throw new Error("Failed to save FAQ");
 
             faqForm.reset();
-            faqIdField.value = ""; // Clear the hidden field
+            faqIdField.value = "";
             await loadFAQs();
         } catch (error) {
             console.error("Error saving FAQ:", error);
@@ -95,14 +91,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // Edit FAQ
     function editFAQ(faq) {
         faqIdField.value = faq.id;
         questionField.value = faq.question;
         if (answerField) answerField.value = faq.answer || "";
     }
 
-    // Delete FAQ
     async function deleteFAQ(id) {
         if (confirm("Are you sure you want to delete this FAQ?")) {
             try {
@@ -117,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 if (!response.ok) throw new Error("Failed to delete FAQ");
 
-                await loadFAQs(); // Reload the FAQ list after deletion
+                await loadFAQs();
             } catch (error) {
                 console.error("Error deleting FAQ:", error);
                 alert("An error occurred while deleting the FAQ.");
@@ -125,6 +119,5 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // Initial load
     await loadFAQs();
 });

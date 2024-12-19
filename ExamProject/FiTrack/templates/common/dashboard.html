@@ -3,13 +3,13 @@
 {% block content %}
 
     <div class="main-content metrics-overview">
-       <section>
-            <h1>Welcome, <br/> {{ request.user.profile }}!</h1>  
-           <div class="btns-wrapper">
+        <section>
+            <h1>Welcome, <br/> {{ request.user.profile }}!</h1>
+            <div class="btns-wrapper">
                 <a href="{% url 'workout-create' %}" class="btn">Log Workout</a>
                 <a href="{% url 'goal-create' %}" class="btn">Set Goal</a>
             </div>
-       </section>
+        </section>
         <section>
             <h2>Your fitness journey at a glance:</h2>
             <ul>
@@ -19,7 +19,7 @@
                 <li>Favorite Category: {{ favorite_category }}</li>
             </ul>
         </section>
-    </div>  
+    </div>
     <div class="main-content metrics-overview">
         <section class="recent-workouts">
             <h2>Recent Workouts</h2>
@@ -35,21 +35,21 @@
             </ul>
         </section>
         <section class="goals">
-                <h2>Active Goals</h2>
-                <ul>
-                    {% for goal in active_goals %}
-                        <li>
-                            <strong>{{ goal.name }}</strong> - {{ goal.target_date }}
-                            <div class="progress">
-                                <div class="progress-bar" style="width: {{ goal.progress_percentage }}%;"></div>
-                            </div>
-                        </li>
-                    {% empty %}
-                        <p>No active goals. <a href="{% url 'goal-create' %}">Create one</a>.</p>
-                    {% endfor %}
-                </ul>
-            </section>      
+            <h2>Active Goals</h2>
+            <ul>
+                {% for goal in active_goals %}
+                    <li>
+                        <strong>{{ goal.name }}</strong> - {{ goal.target_date }}
+                        <div class="progress">
+                            <div class="progress-bar" style="width: {{ goal.progress_percentage }}%;"></div>
+                        </div>
+                    </li>
+                {% empty %}
+                    <p>No active goals. <a href="{% url 'goal-create' %}">Create one</a>.</p>
+                {% endfor %}
+            </ul>
+        </section>
     </div>
 
-   
+
 {% endblock %}

@@ -7,13 +7,14 @@
             {% csrf_token %}
             {{ form.as_p }}
             <div class="btns-wrapper">
-                <button type="submit" class="btn" >Save</button>
+                <button type="submit" class="btn">Save</button>
                 {% if workout %}
-                    <a href="{% url 'workout-detail' user_id=workout.account.id pk=workout.pk %}" class="btn btn-secondary">Cancel</a>
+                    <a href="{% url 'workout-detail' user_id=workout.account.id pk=workout.pk %}"
+                       class="btn btn-secondary">Cancel</a>
                 {% else %}
                     <a href="{% url 'workout-list' %}" class="btn btn-secondary">Cancel</a>
                 {% endif %}
-            </div>            
+            </div>
         </form>
     </div>
 {% endblock %}

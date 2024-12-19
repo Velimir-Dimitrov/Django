@@ -17,7 +17,7 @@ from FiTrack.goal.models import Goal
 
 class HomePage(TemplateView):
 
-    def get_template_names(self):  # dynamic way
+    def get_template_names(self):
         if self.request.user.is_authenticated:
             return ['common/index-logged.html']
         else:
@@ -64,7 +64,6 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
 
-        # Aggregate data
         total_workouts = Workout.objects.filter(account=user).count()
         total_calories = Workout.objects.filter(account=user).aggregate(
             total=Sum('calories_burned')
@@ -80,7 +79,6 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             .first()
         )
 
-        # Prepare context
         context.update({
             'user': user,
             'total_workouts': total_workouts,
@@ -101,10 +99,8 @@ class FAQViewSet(ModelViewSet):
         Set custom permissions for specific actions.
         """
         if self.action in ['create']:
-            # Allow all authenticated users to submit questions
             return [IsAuthenticated()]
         if self.action in ['update', 'partial_update', 'destroy']:
-            # Only staff and superusers can edit/delete FAQs
             return [IsAdminUser()]
         return super().get_permissions()
 
@@ -114,5 +110,5 @@ class FAQPageView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['faqs'] = FAQ.objects.all()  # Pass FAQ data to your template
+        context['faqs'] = FAQ.objects.all()
         return context

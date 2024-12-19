@@ -22,19 +22,19 @@
 
         </div>
     </header>
-        <div id="message-container">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
+    <div id="message-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 
-        {% block content %}
+    {% block content %}
 
-        {% endblock %}
+    {% endblock %}
 
     <footer>
 

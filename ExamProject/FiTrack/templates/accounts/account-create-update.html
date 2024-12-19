@@ -6,7 +6,7 @@
 
         <form method="post" class="form" enctype="multipart/form-data">
             {% csrf_token %}
-        
+
             {% for field in form %}
                 <div class="form-group">
                     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
@@ -24,7 +24,7 @@
             <button type="submit" class="btn">Save</button>
 
             {% if user.is_authenticated %}
-                <p>Don't want to update your account? 
+                <p>Don't want to update your account?
                     <a href="{% url 'profile-details' user.pk %}" class="btn-link">Go back to your profile</a>
                 </p>
             {% endif %}

@@ -157,6 +157,6 @@ WEATHER_API_TOKEN = config('WEATHER_API_TOKEN')
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',  # Only JSON responses
+        'rest_framework.renderers.JSONRenderer',
     ],
 }

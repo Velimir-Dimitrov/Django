@@ -1,14 +1,14 @@
 {% extends 'common/index.html' %}
 {% load static %}
 
-{% block content %}   
-    <div class="main-content">    
-        <div class="home-wrapper">   
-            <h1>FiTrack - don't slack, keep a track!</h1>        
+{% block content %}
+    <div class="main-content">
+        <div class="home-wrapper">
+            <h1>FiTrack - don't slack, keep a track!</h1>
             <p>Path your daily workouts by registering in our app
                 <a href="{% url 'register' %}" class="btn">Start Today</a>
             </p>
         </div>
-        <img src="{% static 'images/track.jpg' %}" alt="training" class="training"/>        
+        <img src="{% static 'images/track.jpg' %}" alt="training" class="training"/>
     </div>
 {% endblock %}

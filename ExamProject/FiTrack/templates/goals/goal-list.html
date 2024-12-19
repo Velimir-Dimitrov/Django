@@ -6,7 +6,7 @@
         <ul class="goals-list">
             {% for goal in object_list %}
                 <li>
-                    <a href="{% url 'goal-detail' goal.id %}">{{ goal.name }}</a> 
+                    <a href="{% url 'goal-detail' goal.id %}">{{ goal.name }}</a>
                     - Target: {{ goal.target_date }}
                 </li>
             {% empty %}

@@ -24,6 +24,6 @@
             <button type="submit">Submit</button>
         </form>
     </div>
-     <script>const USER_IS_SUPERUSER = {{ user.is_superuser|yesno:"true,false" }} </script>
+    <script>const USER_IS_SUPERUSER = {{ user.is_superuser|yesno:"true,false" }} </script>
     <script src="{% static 'js/faq_manager.js' %}"></script>
 {% endblock %}
