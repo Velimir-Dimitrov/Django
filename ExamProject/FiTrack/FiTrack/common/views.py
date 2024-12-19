@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum, Count
 from django.views.generic import TemplateView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import requests
@@ -91,7 +91,20 @@ class FAQViewSet(ModelViewSet):
     serializer_class = FAQSerializer
     permission_classes = [IsAuthenticated]
 
-class FAQPageView(TemplateView):
+    def get_permissions(self):
+        """
+        Set custom permissions for specific actions.
+        """
+        if self.action in ['create']:
+            # Allow all authenticated users to submit questions
+            return [IsAuthenticated()]
+        if self.action in ['update', 'partial_update', 'destroy']:
+            # Only staff and superusers can edit/delete FAQs
+            return [IsAdminUser()]
+        return super().get_permissions()
+
+
+class FAQPageView(LoginRequiredMixin, TemplateView):
     template_name = 'common/faq-manager.html'
 
     def get_context_data(self, **kwargs):

@@ -7,6 +7,7 @@ class FAQ(models.Model):
     answer = models.TextField(
         blank=True,
         null=True,
+        default=''
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
